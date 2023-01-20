@@ -51,6 +51,6 @@ print(data)
 data.to_csv(f"{hashtag}_tweets.csv", index=False)
 
 # Download the dataframe in JSON format
-data.to_json(f"{hashtag}_tweets.json",orient='records')
+data.to_json(f"{hashtag}_tweets.json",orient='records', force_ascii=False, indent=4, default_handler=str)
 
 
