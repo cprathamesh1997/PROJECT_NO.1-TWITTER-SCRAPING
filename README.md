@@ -9,9 +9,9 @@ Today, data is scattered everywhere in the world. Especially in social media, th
 #TWITTER_SCRAPING
 
 #1-Import_required_modules
-#2 Create a text input for the hashtag
+#2 Create a text input for the hashtag or Username
 #3 Connect to the database
-#4 Scrape tweets containing the hashtag
+#4 Scrape tweets containing the hashtag or Username
 #5 Store the data in a collection labeled with the hashtag
 #6 Add a button to upload the data to the database
 #7 Convert the collection to a dataframe
