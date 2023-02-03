@@ -8,13 +8,34 @@ Today, data is scattered everywhere in the world. Especially in social media, th
 
 #TWITTER_SCRAPING
 
-#1-Import_required_modules
-#2 Create a text input for the hashtag or Username
-#3 Connect to the database
-#4 Scrape tweets containing the hashtag or Username
-#5 Store the data in a collection labeled with the hashtag
-#6 Add a button to upload the data to the database
-#7 Convert the collection to a dataframe
-#8 To view dataframe
-#9a Download the dataframe in CSV format
-#9b Download the dataframe in JSON format
+#-Import_required_modules
+
+# Load Image or Gif under Title
+
+# Create a GUI using streamlit
+
+# Create a text input for the hashtag or Username
+
+# Connect to the database
+
+# Mention the required database
+
+# Create date range input and also interval
+
+# Create a limit selector for the number of tweets
+
+# Scrape tweets containing the hashtag or Username
+
+# Convert the collection to a dataframe
+
+# Display or view dataframe
+
+# Add a button to upload the data to the database
+
+# Creates a new collection name in database.
+
+# Inserts the dataframe in selected collection.
+
+# Add a button to download the data
+# Download the dataframe in CSV format
+# Download the dataframe in JSON format
