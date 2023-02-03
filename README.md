@@ -10,7 +10,7 @@ Today, data is scattered everywhere in the world. Especially in social media, th
 
 # Import_required_modules
 
-# Load Image or Gif under Title
+# Load Image under Title
 
 # Create a GUI using streamlit
 
@@ -22,7 +22,7 @@ Today, data is scattered everywhere in the world. Especially in social media, th
 
 # Create date range input and also interval
 
-# Create a limit selector for the number of tweets
+# Create text input for the limit of tweets to be scraped
 
 # Scrape tweets containing the hashtag or Username
 
