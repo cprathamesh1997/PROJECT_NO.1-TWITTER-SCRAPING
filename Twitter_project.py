@@ -1,56 +1,89 @@
 #TWITTER_SCRAPING
 
-#Import_required_modules
+# Import required modules
 import pandas as pd
 import pymongo
 import streamlit as st
 import snscrape.modules.twitter as sntwitter
 import datetime
+from PIL import Image
 
-# Create a text input for the hashtag
-hashtag =input('Enter the Username or Hashtag(#example):')
+# Load Image or Gif under Title
+image =("https://ucarecdn.com/51e11998-6315-46ef-b39e-40476425efda/")
+
+# Create a GUI using streamlit
+st.title("Twitter Scraping")
+st.image(image, use_column_width=True)
+
+# Create text input for the hashtag
+hashtag = st.text_input("Enter the Username or Hashtag (e.g. #example)>>>")
 
 
 # Connect to the database
 client = pymongo.MongoClient('mongodb://127.0.0.1:27017')
-db = client.twitter_scraped_data
+
+# Mention the required database
+database = "Twitter"
+
+
+# Create date range input
+start_date = st.date_input("Enter start date>>>")
+end_date = st.date_input("Enter end date>>>")
+
+# Also time_interval
+time_interval = end_date - start_date
+
+# Create a limit selector for the number of tweets
+limit = st.slider("Select the number of tweets>>>", min_value=1, max_value=1000, value=100)
 
 
 # Scrape tweets containing the hashtag
 tweets = []
-limit=100
-for tweet in sntwitter.TwitterSearchScraper('{}'.format(hashtag)).get_items():
-    if len(tweets)== limit:
-        break
-    else:
-         tweets.append({'date': tweet.date, 'id': tweet.id, 'url': tweet.url,'tweet_content': tweet.content,'user': tweet.user.username, 'replyCount': tweet.replyCount, 'retweet_count': tweet.retweetCount,'language': tweet.lang, 'source': tweet.source, 'like_count': tweet.likeCount})
+if hashtag:
+    for tweet in sntwitter.TwitterSearchScraper('{}'.format(hashtag)).get_items():
+        if len(tweets)== limit:
+            break
+        else:
+             tweets.append({'date': tweet.date, 'id': tweet.id, 'url': tweet.url,'tweet_content': tweet.content,'user': tweet.user.username, 'replyCount': tweet.replyCount, 'retweet_count': tweet.retweetCount,'language': tweet.lang, 'source': tweet.source, 'like_count': tweet.likeCount})
+else:
+    st.warning("Please enter a valid hashtag or username")
+
+# Convert the collection to a dataframe
+data = pd.DataFrame(tweets)
+
+# Display the dataframe
+st.dataframe(data)
 
 
-# Store the data in a collection labeled with the hashtag
-start_date = datetime.datetime(2023, 1, 1)
-end_date = datetime.datetime(2023, 1, 20)
-time_interval = end_date - start_date
-collection=db[hashtag+str(time_interval)]
-
-
- #Add a button to upload the data to the database
+# Add a button to upload the data to the database
 if st.button('Upload to database'):
-      client = pymongo.MongoClient('mongodb://127.0.0.1:27017')
-      db = client.twitter_scraped_data
-      collection=db[hashtag+str(time_interval)]
+
+      #Required_Database
+      db = client[database]
+
+      # Creates a new collection name in database.
+      collection = db[hashtag + str(time_interval)]
+
+
+      # Converts the dataframe  into a dictionary format.
+      # With the argument "records" specifying that each row of the dataframe should be a dictionary
+      data_dict = data.to_dict("records")
+
+      # Inserts the dataframe in selected collection.
+      collection.insert_many(data_dict)
+
+      #Finally
       st.success('Data uploaded to the database')
 
 
-# Convert the collection to a dataframe
-data = pd.DataFrame(list(collection.find()))
+# Add a button to download the data in CSV format
+if st.button('Download as CSV'):
+    data.to_csv(f"{hashtag}_tweets.csv", index=False)
+    st.success('Data downloaded as CSV')
 
-#To view dataframe
-print(data)
-
-# Download the dataframe in CSV format
-data.to_csv(f"{hashtag}_tweets.csv", index=False)
-
-# Download the dataframe in JSON format
-data.to_json(f"{hashtag}_tweets.json",orient='records', force_ascii=False, indent=4, default_handler=str)
+# Add a button to download the data in JSON format
+if st.button('Download as JSON'):
+    data.to_json(f"{hashtag}_tweets.json",orient='records', force_ascii=False, indent=4, default_handler=str)
+    st.success('Data downloaded as JSON')
 
 
