@@ -6,9 +6,9 @@ TWITTER SCRAPING USING PYTHON,SNSCRAPE,MONGODB AND STREAMLIT.
 Today, data is scattered everywhere in the world. Especially in social media, there may be a big quantity of data on Facebook, Instagram, Youtube, Twitter, etc. This consists of pictures and films on Youtube and Instagram as compared to Facebook and Twitter. To get the real facts on Twitter, you want to scrape the data from Twitter. You Need to Scrape the data like (date, id, url, tweet content, user,reply count, retweet count,language, source, like count etc) from twitter.
 
 
-#TWITTER_SCRAPING
+# TWITTER_SCRAPING
 
-#-Import_required_modules
+# Import_required_modules
 
 # Load Image or Gif under Title
 
@@ -37,5 +37,5 @@ Today, data is scattered everywhere in the world. Especially in social media, th
 # Inserts the dataframe in selected collection.
 
 # Add a button to download the data
-# Download the dataframe in CSV format
-# Download the dataframe in JSON format
+# A.]Download the dataframe in CSV format
+# B.]Download the dataframe in JSON format
