@@ -5,7 +5,6 @@ import pandas as pd #For data manipulation and analysis
 import pymongo  #To interact with a MongoDB database
 import streamlit as st #Used to create the GUI
 import snscrape.modules.twitter as sntwitter #Library used to scrape data from social media websites, including Twitter
-from PIL import Image #Imports the Image module from the Python Imaging Library (PIL) package
 
 
 # Load image
