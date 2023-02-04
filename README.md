@@ -5,6 +5,8 @@ TWITTER SCRAPING USING PYTHON,SNSCRAPE,MONGODB AND STREAMLIT.
 
 Today, data is scattered everywhere in the world. Especially in social media, there may be a big quantity of data on Facebook, Instagram, Youtube, Twitter, etc. This consists of pictures and films on Youtube and Instagram as compared to Facebook and Twitter. To get the real facts on Twitter, you want to scrape the data from Twitter. You Need to Scrape the data like (date, id, url, tweet content, user,reply count, retweet count,language, source, like count etc) from twitter.
 
+This code is a Streamlit app that allows users to scrape Twitter data based on a hashtag or username, with a defined date range, and scrape a certain limit of tweets. The scraped data is displayed in a DataFrame in the app and can be saved as a CSV or JSON file. The code also allows the scraped data to be uploaded to a MongoDB database.
+
 
 # Import_required_modules
 # Load Image under Title
