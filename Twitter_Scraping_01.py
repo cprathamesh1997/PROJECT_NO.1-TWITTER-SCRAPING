@@ -1,12 +1,16 @@
 # Import required modules
-import pandas as pd
-import pymongo
-import streamlit as st
-import snscrape.modules.twitter as sntwitter
-from PIL import Image
+
+
+import pandas as pd #For data manipulation and analysis
+import pymongo  #To interact with a MongoDB database
+import streamlit as st #Used to create the GUI
+import snscrape.modules.twitter as sntwitter #Library used to scrape data from social media websites, including Twitter
+from PIL import Image #Imports the Image module from the Python Imaging Library (PIL) package
+
 
 # Load image
-image = Image.open(r"C:\Users\cprat\OneDrive\Pictures\Saved Pictures\how-to-scrape-twitter-step-by-step-guide.jpg")
+image = (r"https://www.bestproxyreviews.com/wp-content/uploads/2020/05/Twitter-scraping.jpg")
+
 
 # Create a GUI using streamlit
 st.title("Twitter Scraping")
@@ -46,11 +50,15 @@ if hashtag:
 else:
     st.warning("Please enter a valid hashtag or username")
 
-# Convert the collection to a dataframe
+# Convert data to a dataframe
 data = pd.DataFrame(tweets)
 
-# Display the dataframe
-st.dataframe(data)
+# Add a button to control the display of the dataframe
+show_dataframe = st.button("Show Dataframe")
+
+# Display the dataframe only when the button is pressed
+if show_dataframe:
+    st.dataframe(data)
 
 
 # Add a button to upload the data to the database
@@ -62,9 +70,8 @@ if st.button('Upload to database'):
       # Creates a new collection name in database.
       collection = db[str(limit)+'_'+hashtag+"_"+str(start_date)+"_"+str(end_date)]
 
-
-      # Converts the dataframe  into a dictionary format
-      # "records" specifying that each row of the dataframe to be a dictionary
+      # Converts the pandas dataframe data into a dictionary format,where each row of the dataframe is converted into dictionary
+      # Keys as the column names and the values as the corresponding cell values
       data_dict = data.to_dict("records")
 
       # Inserts the dataframe in selected collection.
@@ -83,3 +90,4 @@ if st.button('Download as CSV'):
 if st.button('Download as JSON'):
     data.to_json(f"{str(limit)+'_'+hashtag+'_'+str(start_date)+'_'+str(end_date)}_tweets.json",orient='records', force_ascii=False, indent=4, default_handler=str)
     st.success('Data downloaded as JSON')
+
